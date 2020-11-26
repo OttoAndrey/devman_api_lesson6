@@ -30,9 +30,6 @@
 Необходимые переменные:
 - `VK_TOKEN` - токен доступа. Можно получить через [Implicit Flow](https://vk.com/dev/implicit_flow_user).
 
-- `VK_UPLOAD_URL` - адрес для загрузки изображений. Можно получить через метод
-[photos.getWallUploadServer](https://vk.com/dev/photos.getWallUploadServer)
-
 - `VK_GROUP_ID` - id группы, на стенку которой будут публиковаться изображения.
 
 
