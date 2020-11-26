@@ -5,6 +5,16 @@ import requests
 from dotenv import load_dotenv
 
 
+def get_upload_url(vk_token, vk_group_id):
+    params = {'v': 5.21, 'access_token': vk_token, 'group_id': vk_group_id}
+    upload_url = 'https://api.vk.com/method/photos.getWallUploadServer'
+    server_response = requests.get(upload_url, params=params)
+    server_response.raise_for_status()
+    server_data = server_response.json()['response']
+
+    return server_data['upload_url']
+
+
 def get_last_comics_num():
     last_comics_url = 'https://xkcd.com/info.0.json'
     last_comics_response = requests.get(last_comics_url)
@@ -81,8 +91,8 @@ def main():
     load_dotenv()
     vk_token = os.getenv('VK_TOKEN')
     vk_group_id = os.getenv('VK_GROUP_ID')
-    vk_upload_url = os.getenv('VK_UPLOAD_URL')
 
+    vk_upload_url = get_upload_url(vk_token, vk_group_id)
     last_comics_num = get_last_comics_num()
     random_comics_num = random.randint(1, last_comics_num)
     comics_data = get_random_comics(random_comics_num)
