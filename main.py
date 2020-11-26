@@ -97,10 +97,12 @@ def main():
     random_comics_num = random.randint(1, last_comics_num)
     comics_data = get_random_comics(random_comics_num)
     img = download_image(comics_data)
-    upload_data = upload_image(vk_token, vk_group_id, vk_upload_url, img)
-    save_data = save_image(vk_token, vk_group_id, upload_data)
-    post_image(vk_token, vk_group_id, comics_data, save_data)
-    os.remove(img)
+    try:
+        upload_data = upload_image(vk_token, vk_group_id, vk_upload_url, img)
+        save_data = save_image(vk_token, vk_group_id, upload_data)
+        post_image(vk_token, vk_group_id, comics_data, save_data)
+    finally:
+        os.remove(img)
 
 
 if __name__ == '__main__':
